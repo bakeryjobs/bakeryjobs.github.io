@@ -155,10 +155,14 @@ post and will not be sold or used for marketing purposes.</p>
 </p>
 <script>
   sendFormData = () => {
-    const XHR = new XMLHttpRequest();
-    const FD = new FormData(form);
-    XHR.open("POST", "https://formspree.io/f/xqkwbqyn");
-    XHR.send(FD);
+    const req = new XMLHttpRequest();
+
+    req.addEventListener('load', event => window.location.href = "/thank-you")
+    req.addEventListener('error', event => window.location.href = "/thank-you")
+
+    const formData = new FormData(form);
+    req.open("POST", "https://formspree.io/f/xqkwbqyn");
+    req.send(formData);
   }
 
   const form = document.getElementById("job-post-form");
@@ -168,7 +172,6 @@ post and will not be sold or used for marketing purposes.</p>
     submitButton.textContent = "Posting job..."
     event.preventDefault();
     sendFormData();
-
   });
 </script>
         </div>
